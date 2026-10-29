@@ -1,0 +1,205 @@
+/* Pantalla de check-in. Usa las variables de index.css; todo va con prefijo ci- para no chocar con nada */
+
+.ci-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) 1fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+
+.ci-codigo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.ci-btn {
+  width: 100%;
+  padding: 0.9rem 1.4rem;
+  font-size: 1.05rem;
+}
+
+/* ---------- panel de resultado ---------- */
+.ci-resultado {
+  min-height: 220px;
+}
+
+.ci-vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 220px;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--tinta-suave);
+  border: 2px dashed var(--borde);
+  border-radius: var(--radio);
+}
+
+.ci-vacio p {
+  margin: 0;
+}
+
+.ci-card {
+  --ci-color: var(--borde);
+  --ci-fondo: var(--crema);
+  display: flex;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  background: var(--papel);
+  border-radius: var(--radio);
+  border-left: 6px solid var(--ci-color);
+  box-shadow: var(--sombra);
+  animation: ci-entrada 0.25s ease-out;
+}
+
+.ci-card--exito {
+  --ci-color: #1f8f4e;
+  --ci-fondo: #e1f2e8;
+}
+
+.ci-card--duplicado {
+  --ci-color: var(--dorado);
+  --ci-fondo: #fdefc8;
+}
+
+.ci-card--rechazado,
+.ci-card--error {
+  --ci-color: var(--rojo);
+  --ci-fondo: #fbe3e2;
+}
+
+.ci-icono {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--ci-fondo);
+  color: var(--ci-color);
+}
+
+.ci-card--duplicado .ci-icono {
+  color: #7a5200;
+}
+
+.ci-icono svg {
+  width: 28px;
+  height: 28px;
+}
+
+.ci-cuerpo {
+  min-width: 0;
+  flex: 1;
+}
+
+.ci-cuerpo h2 {
+  margin: 0.4rem 0 0.2rem;
+  font-size: 1.5rem;
+}
+
+.ci-mensaje {
+  margin: 0;
+  font-weight: 700;
+}
+
+.ci-datos {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1rem;
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+}
+
+.ci-datos dt {
+  color: var(--tinta-suave);
+}
+
+.ci-datos dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.ci-avisos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--borde);
+}
+
+.ci-avisos-nota {
+  margin: 1rem 0 0;
+}
+
+/* ---------- historial de la sesión ---------- */
+.ci-historial {
+  margin-top: 1.2rem;
+}
+
+.ci-historial h2 {
+  font-size: 1.1rem;
+}
+
+.ci-historial ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ci-historial li {
+  display: grid;
+  grid-template-columns: 3.5rem 9rem 6.5rem 6.5rem 1fr;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.ci-historial li:last-child {
+  border-bottom: 0;
+}
+
+.ci-hist-msg {
+  min-width: 0;
+}
+
+@keyframes ci-entrada {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ci-card {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .ci-grid {
+    grid-template-columns: 1fr;
+  }
+  .ci-card {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .ci-historial li {
+    grid-template-columns: 1fr auto;
+    row-gap: 0.15rem;
+  }
+  .ci-hist-msg {
+    grid-column: 1 / -1;
+  }
+}
